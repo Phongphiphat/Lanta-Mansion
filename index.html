@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phongphiphat Lanta Mansion - Your Serene Getaway in Koh Lanta</title>
-    
-    <!-- NEW: Favicon Links -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-
     <style>
         /* All previous CSS remains the same... */
         body, h1, h2, h3, p, ul { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: 120px; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
         .container { max-width: 1100px; margin: auto; overflow: hidden; padding: 0 2rem; }
+        
+        /* --- REWRITTEN & FIXED: Navigation Bar Styles --- */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; background: #2c3e50; z-index: 1001; height: 60px; }
         .nav-container { position: relative; height: 100%; display: flex; align-items: center; overflow: visible !important; }
         .nav-logo { position: absolute; left: 2rem; top: 0; width: 120px; height: 120px; background: #2c3e50; border-radius: 50%; transition: transform 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 1002; }
         .nav-logo::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 50%; border-bottom-left-radius: 120px; border-bottom-right-radius: 120px; box-shadow: 0px 8px 10px -6px rgba(0,0,0,0.4); z-index: -1; }
         .nav-logo:hover { transform: scale(1.05); }
         .nav-logo img { height: 110px; width: 110px; border-radius: 50%; }
+        
         .nav-menu { list-style: none; display: flex; gap: 1rem; align-items: center; margin-left: auto; }
         .nav-menu a { color: #fff; text-decoration: none; font-size: 1rem; transition: color 0.3s ease; }
         .nav-menu a:hover { color: #e67e22; }
         .nav-btn { background: #e67e22; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.3s ease; }
         .nav-btn:hover { background: #d35400; color: #fff !important; }
-        .nav-phone { color: #fff; font-weight: bold; font-size: 0.9rem; padding-left: 1rem; border-left: 1px solid rgba(255, 255, 255, 0.3); margin-left: 0.5rem; }
-        .nav-phone a { color: #fff; text-decoration: none; }
+        .nav-phone a { color: #fff; font-weight: bold; font-size: 0.9rem; padding-left: 1rem; border-left: 1px solid rgba(255, 255, 255, 0.3); margin-left: 0.5rem; }
+        
+        #menu-toggle { display: none; } /* Hide hamburger by default */
+
+        /* All other styles (header, sections, etc.) remain the same */
         .header { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/header-bg.jpg') no-repeat center center/cover; height: 100vh; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .header h1 { font-size: 4rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
         .header p { font-size: 1.5rem; font-weight: 300; }
@@ -74,13 +77,39 @@
         .address-info h3 { font-size: 1.5rem; color: #2c3e50; margin-bottom: 1rem; }
         .address-info p { font-size: 1.1rem; line-height: 1.8; }
 
-        @media (max-width: 768px) {
+        /* --- UPDATED: Mobile Responsive Styles --- */
+        @media (max-width: 992px) { /* A slightly larger breakpoint for better compatibility */
+            html { scroll-padding-top: 100px; }
+            .nav-container { justify-content: flex-end; }
             .nav-logo { width: 100px; height: 100px; left: 1rem;}
             .nav-logo img { width: 90px; height: 90px; }
-            .nav-menu { gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
-            .nav-menu a { font-size: 0.8rem; padding: 0.3rem; }
-            .nav-phone { display: none; }
-            html { scroll-padding-top: 100px; }
+            
+            #menu-toggle {
+                display: block;
+                background: none; border: none; cursor: pointer; padding: 1rem; z-index: 1003;
+            }
+            #menu-toggle .bar {
+                display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: all 0.3s ease-in-out;
+            }
+
+            .nav-menu {
+                display: none; /* Hide by default on mobile */
+                position: absolute;
+                top: 60px; /* Position it below the main navbar */
+                right: 0;
+                width: 100%;
+                background: #2c3e50;
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            .nav-menu.active {
+                display: flex; /* Show when hamburger is clicked */
+            }
+            .nav-menu li { width: 100%; text-align: center; padding: 0.5rem 0; }
+            .nav-phone a { border: none; margin: 0; padding: 0; }
+
+            .header h1 { font-size: 2.8rem; }
+            .header p { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -91,6 +120,8 @@
             <a href="#" class="nav-logo">
                 <img src="images/logo.png" alt="Phongphiphat Lanta Mansion Logo">
             </a>
+            
+            <!-- The menu is now controlled by JS and the .active class -->
             <ul class="nav-menu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#rooms">Rooms</a></li>
@@ -100,6 +131,12 @@
                 <li><a href="#booking" class="nav-btn">Book Now</a></li>
                 <li class="nav-phone"><a href="tel:+66653181718">+66 65 318 1718</a></li>
             </ul>
+            
+            <button id="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -110,7 +147,7 @@
     <section id="gallery" class="section section-light"><div class="container"><h2>Photo Gallery</h2><div class="gallery-grid"><img src="images/double_room/first.jpg" alt="Double Room View"><img src="images/twin_room/first.jpg" alt="Twin Room View"><img src="images/double_room/gallery-9.jpg" alt="Double Room"><img src="images/double_room/gallery-3.jpg" alt="Double Room"><img src="images/double_room/gallery-5.jpg" alt="Double Room"><img src="images/double_room/gallery-7.jpg" alt="Double Room"><img src="images/twin_room/gallery-2.jpg" alt="Twin Room"><img src="images/twin_room/gallery-13.jpg" alt="Twin Room"><img src="images/twin_room/gallery-12.jpg" alt="Twin Room"><img src="images/gallery-8.jpg" alt="Hotel exterior view"><img src="images/double_room/gallery-1.jpg" alt="hotel balcony 1st floor"><img src="images/double_room/gallery-10.jpg" alt="hotel balcony 2nd floor"><img src="images/double_room/gallery-11.jpg" alt="Kitchen area"></div></div></section>
     <section id="contact" class="section"><div class="container"><h2>Get in Touch</h2><p>Have a question? Fill out the form below and we will get back to you shortly.</p><div class="contact-grid"><div class="contact-form"><form id="contact-form" action="https://formspree.io/f/xyzdbeed" method="POST"><input type="text" name="name" placeholder="Your Name" required><input type="email" name="email" placeholder="Your Email" required><textarea name="message" placeholder="Your Message" required></textarea><button type="submit" class="btn btn-form">Send Message</button></form></div></div></div></section>
     <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><p>Check availability and book your stay with us directly.</p><iframe class="booking-iframe" src="https://be.aiosell.com/book/3e3f09e846"></iframe></div></section>
-    <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718">+66 65 318 1718</a></p></div></div></div></section>
+    <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718">+66 65 318 1718</a></p></div></div></div></section>
     <footer class="footer">
         <p>&copy; 2025 Phongphiphat Lanta Mansion. All Rights Reserved.</p>
     </footer>
@@ -125,7 +162,7 @@
     </div>
 
 <script>
-    // All JS remains the same
+    // All previous JS remains the same...
     const roomImages = { double: ['images/double_room/first.jpg','images/double_room/gallery-9.jpg','images/double_room/gallery-1.jpg','images/double_room/gallery-3.jpg','images/double_room/gallery-5.jpg','images/double_room/gallery-7.jpg','images/double_room/gallery-9.jpg','images/double_room/gallery-10.jpg','images/double_room/gallery-11.jpg','images/double_room/gallery-6.jpg'], twin: ['images/twin_room/first.jpg','images/twin_room/gallery-2.jpg','images/twin_room/gallery-13.jpg','images/twin_room/gallery-10.jpg','images/twin_room/gallery-12.jpg','images/twin_room/gallery-11.jpg','images/twin_room/gallery-6.jpg'] };
     const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightbox-img');
     const roomCardImages = document.querySelectorAll('.room-image-container'); 
@@ -177,6 +214,14 @@
     popupClose.addEventListener('click', () => {
         statusPopup.style.display = 'none';
     });
+
+    // --- UPDATED: Hamburger Menu Toggle Logic ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.querySelector('.nav-menu'); // Target the <ul> directly
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+
 </script>
 
 <!--Start of Tawk.to Script-->
