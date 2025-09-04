@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phongphiphat Lanta Mansion - Your Serene Getaway in Koh Lanta</title>
+    
+    <!-- NEW: Favicon Links -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <style>
+        /* All previous CSS remains the same... */
+        body, h1, h2, h3, p, ul { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 1100px; margin: auto; overflow: hidden; padding: 0 2rem; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: #2c3e50; z-index: 1001; height: 60px; }
+        .nav-container { position: relative; height: 100%; display: flex; align-items: center; overflow: visible !important; }
+        .nav-logo { position: absolute; left: 2rem; top: 0; width: 120px; height: 120px; background: #2c3e50; border-radius: 50%; transition: transform 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 1002; }
+        .nav-logo::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 50%; border-bottom-left-radius: 120px; border-bottom-right-radius: 120px; box-shadow: 0px 8px 10px -6px rgba(0,0,0,0.4); z-index: -1; }
+        .nav-logo:hover { transform: scale(1.05); }
+        .nav-logo img { height: 110px; width: 110px; border-radius: 50%; }
+        .nav-menu { list-style: none; display: flex; gap: 1rem; align-items: center; margin-left: auto; }
+        .nav-menu a { color: #fff; text-decoration: none; font-size: 1rem; transition: color 0.3s ease; }
+        .nav-menu a:hover { color: #e67e22; }
+        .nav-btn { background: #e67e22; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.3s ease; }
+        .nav-btn:hover { background: #d35400; color: #fff !important; }
+        .nav-phone { color: #fff; font-weight: bold; font-size: 0.9rem; padding-left: 1rem; border-left: 1px solid rgba(255, 255, 255, 0.3); margin-left: 0.5rem; }
+        .nav-phone a { color: #fff; text-decoration: none; }
+        .header { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/header-bg.jpg') no-repeat center center/cover; height: 100vh; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .header h1 { font-size: 4rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+        .header p { font-size: 1.5rem; font-weight: 300; }
+        .btn { display: inline-block; background: #e67e22; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-size: 1.2rem; margin-top: 2rem; transition: background 0.3s ease; border: none; cursor: pointer; }
+        .btn-form { margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 1rem; }
+        .btn:hover { background: #d35400; }
+        .section { padding: 4rem 0; text-align: center; }
+        .section-light { background: #fff; }
+        .section h2 { font-size: 2.5rem; margin-bottom: 2rem; color: #2c3e50; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; max-width: 800px; margin: 2rem auto 0 auto; text-align: left; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #ddd; font-size: 1rem; font-family: inherit; }
+        .contact-form textarea { resize: vertical; min-height: 150px; }
+        #about p { font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
+        .room-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+        .room-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; width: 320px; text-align: left; }
+        .room-image-container { position: relative; cursor: pointer; }
+        .room-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .room-image-container::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(44, 62, 80, 0.5); opacity: 0; transition: opacity 0.3s ease; }
+        .room-image-container:hover::after { opacity: 1; }
+        .room-card-content { padding: 1.5rem; }
+        .room-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #e67e22; }
+        .room-card ul { list-style: none; padding: 0; }
+        .room-card li { margin-bottom: 0.5rem; padding-left: 1.2rem; position: relative; }
+        .room-card li::before { content: '✔'; color: #27ae60; position: absolute; left: 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .gallery-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .gallery-grid img:hover { transform: scale(1.05); }
+        .booking-iframe { width: 100%; height: 1200px; border: 1px solid #ddd; border-radius: 8px; margin-top: 2rem; }
+        .footer { background: #2c3e50; color: #fff; text-align: center; padding: 2rem 0; }
+        .lightbox { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; }
+        .lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; }
+        .lightbox-content img { width: 100%; height: 100%; object-fit: contain; }
+        .lightbox-close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10000; }
+        .lightbox-prev, .lightbox-next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 35px; padding: 1rem; user-select: none; transition: background-color 0.3s ease; z-index: 9999; border-radius: 3px; }
+        .lightbox-prev:hover, .lightbox-next:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .lightbox-prev { left: 1rem; }
+        .lightbox-next { right: 1rem; }
+        #status-popup { display: none; position: fixed; z-index: 2000; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: #27ae60; color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; }
+        #status-popup.error { background-color: #c0392b; }
+        #popup-close { position: absolute; top: 5px; right: 10px; font-size: 24px; font-weight: bold; cursor: pointer; }
+        .location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center; margin-top: 2rem; text-align: left; }
+        .map-container { width: 100%; height: 350px; }
+        .map-container iframe { width: 100%; height: 100%; border-radius: 8px; border: 0; }
+        .address-info h3 { font-size: 1.5rem; color: #2c3e50; margin-bottom: 1rem; }
+        .address-info p { font-size: 1.1rem; line-height: 1.8; }
+
+        @media (max-width: 768px) {
+            .nav-logo { width: 100px; height: 100px; left: 1rem;}
+            .nav-logo img { width: 90px; height: 90px; }
+            .nav-menu { gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+            .nav-menu a { font-size: 0.8rem; padding: 0.3rem; }
+            .nav-phone { display: none; }
+            html { scroll-padding-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <img src="images/logo.png" alt="Phongphiphat Lanta Mansion Logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="#gallery">Photos</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#booking" class="nav-btn">Book Now</a></li>
+                <li class="nav-phone"><a href="tel:+66653181718">+66 65 318 1718</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- All other sections remain the same... -->
+    <header class="header"><div class="container"><h1>Phongphiphat Lanta Mansion</h1><p>Your peaceful retreat, just moments from the sea.</p><a href="#booking" class="btn">Book Now</a></div></header>
+    <section id="about" class="section section-light"><div class="container"><h2>Welcome to Your Home in Koh Lanta</h2><p>Nestled in a calm and quiet neighborhood, Phongphiphat Lanta Mansion offers a perfect blend of comfort and tranquility. Located just 500 meters from the beautiful Klong Tob beach, our hotel is an ideal spot for travelers seeking a peaceful escape. Enjoy our lush gardens, comfortable rooms, and the warm hospitality we are known for.</p></div></section>
+    <section id="rooms" class="section"><div class="container"><h2>Our Rooms</h2><div class="room-container"><div class="room-card"><div class="room-image-container"><img src="images/double_room/first.jpg" alt="Superior Double Room" data-room="double"></div><div class="room-card-content"><h3>Superior Double Room</h3><ul><li>Comfortable Double Bed</li><li>Private Balcony</li><li>Air Conditioning</li><li>Free WiFi</li></ul></div></div><div class="room-card"><div class="room-image-container"><img src="images/twin_room/first.jpg" alt="Superior Twin Room" data-room="twin"></div><div class="room-card-content"><h3>Superior Twin Room</h3><ul><li>Two Single Beds</li><li>Private Balcony</li><li>Air Conditioning</li><li>Free WiFi</li></ul></div></div></div></div></section>
+    <section id="gallery" class="section section-light"><div class="container"><h2>Photo Gallery</h2><div class="gallery-grid"><img src="images/double_room/first.jpg" alt="Double Room View"><img src="images/twin_room/first.jpg" alt="Twin Room View"><img src="images/double_room/gallery-9.jpg" alt="Double Room"><img src="images/double_room/gallery-3.jpg" alt="Double Room"><img src="images/double_room/gallery-5.jpg" alt="Double Room"><img src="images/double_room/gallery-7.jpg" alt="Double Room"><img src="images/twin_room/gallery-2.jpg" alt="Twin Room"><img src="images/twin_room/gallery-13.jpg" alt="Twin Room"><img src="images/twin_room/gallery-12.jpg" alt="Twin Room"><img src="images/gallery-8.jpg" alt="Hotel exterior view"><img src="images/double_room/gallery-1.jpg" alt="hotel balcony 1st floor"><img src="images/double_room/gallery-10.jpg" alt="hotel balcony 2nd floor"><img src="images/double_room/gallery-11.jpg" alt="Kitchen area"></div></div></section>
+    <section id="contact" class="section"><div class="container"><h2>Get in Touch</h2><p>Have a question? Fill out the form below and we will get back to you shortly.</p><div class="contact-grid"><div class="contact-form"><form id="contact-form" action="https://formspree.io/f/xyzdbeed" method="POST"><input type="text" name="name" placeholder="Your Name" required><input type="email" name="email" placeholder="Your Email" required><textarea name="message" placeholder="Your Message" required></textarea><button type="submit" class="btn btn-form">Send Message</button></form></div></div></div></section>
+    <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><p>Check availability and book your stay with us directly.</p><iframe class="booking-iframe" src="https://be.aiosell.com/book/3e3f09e846"></iframe></div></section>
+    <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718">+66 65 318 1718</a></p></div></div></div></section>
+    <footer class="footer">
+        <p>&copy; 2025 Phongphiphat Lanta Mansion. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox"><span class="lightbox-close">&times;</span><div class="lightbox-content"><img id="lightbox-img"></div><a class="lightbox-prev">&#10094;</a><a class="lightbox-next">&#10095;</a></div>
+
+    <!-- Status Popup -->
+    <div id="status-popup">
+        <span id="popup-close">&times;</span>
+        <p id="popup-message"></p>
+    </div>
+
+<script>
+    // All JS remains the same
+    const roomImages = { double: ['images/double_room/first.jpg','images/double_room/gallery-9.jpg','images/double_room/gallery-1.jpg','images/double_room/gallery-3.jpg','images/double_room/gallery-5.jpg','images/double_room/gallery-7.jpg','images/double_room/gallery-9.jpg','images/double_room/gallery-10.jpg','images/double_room/gallery-11.jpg','images/double_room/gallery-6.jpg'], twin: ['images/twin_room/first.jpg','images/twin_room/gallery-2.jpg','images/twin_room/gallery-13.jpg','images/twin_room/gallery-10.jpg','images/twin_room/gallery-12.jpg','images/twin_room/gallery-11.jpg','images/twin_room/gallery-6.jpg'] };
+    const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightbox-img');
+    const roomCardImages = document.querySelectorAll('.room-image-container'); 
+    let currentImageList = [], currentImageIndex = 0;
+    function openLightbox(e){currentImageList=roomImages[e],currentImageIndex=0,updateLightboxImage(),lightbox.style.display="flex",document.addEventListener("keydown",handleKeydown)}function updateLightboxImage(){lightboxImg.src=currentImageList[currentImageIndex]}function showNextImage(){currentImageIndex=(currentImageIndex+1)%currentImageList.length,updateLightboxImage()}function showPrevImage(){currentImageIndex=(currentImageIndex-1+currentImageList.length)%currentImageList.length,updateLightboxImage()}function closeLightbox(){lightbox.style.display="none",document.removeEventListener("keydown",handleKeydon)}
+    roomCardImages.forEach(container => {
+        container.addEventListener('click', () => {
+            const img = container.querySelector('img');
+            const roomType = img.getAttribute('data-room');
+            if (roomType) { openLightbox(roomType); }
+        });
+    });
+    document.querySelector(".lightbox-close").addEventListener("click",closeLightbox),document.querySelector(".lightbox-next").addEventListener("click",showNextImage),document.querySelector(".lightbox-prev").addEventListener("click",showPrevImage),lightbox.addEventListener("click",e=>{e.target===lightbox&&closeLightbox()});function handleKeydown(e){"ArrowRight"===e.key?showNextImage():"ArrowLeft"===e.key?showPrevImage():"Escape"===e.key&&closeLightbox()}
+    const form = document.getElementById('contact-form');
+    const statusPopup = document.getElementById('status-popup');
+    const popupMessage = document.getElementById('popup-message');
+    const popupClose = document.getElementById('popup-close');
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {'Accept': 'application/json'}
+        }).then(response => {
+            if (response.ok) {
+                popupMessage.textContent = "Thank you! Your message has been sent successfully.";
+                statusPopup.classList.remove('error');
+                statusPopup.style.display = 'block';
+                form.reset();
+            } else {
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        popupMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        popupMessage.textContent = 'Oops! There was a problem submitting your form.';
+                    }
+                    statusPopup.classList.add('error');
+                    statusPopup.style.display = 'block';
+                })
+            }
+        }).catch(error => {
+            popupMessage.textContent = 'Oops! There was a problem submitting your form.';
+            statusPopup.classList.add('error');
+            statusPopup.style.display = 'block';
+        });
+    }
+    form.addEventListener("submit", handleSubmit);
+    popupClose.addEventListener('click', () => {
+        statusPopup.style.display = 'none';
+    });
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68b912c067c586192c66530a/1j49f2gju';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+</html>
