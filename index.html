@@ -12,14 +12,7 @@
         html { scroll-behavior: smooth; scroll-padding-top: 120px; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
         .container { max-width: 1100px; margin: auto; padding: 0 2rem; }
-        
-        /* UPDATED: Added transform to fix mobile scrolling bug */
-        .navbar { 
-            position: fixed; top: 0; left: 0; width: 100%; background: #2c3e50; z-index: 1001; height: 60px;
-            -webkit-transform: translateZ(0); /* For older browser compatibility */
-            transform: translateZ(0); /* This forces hardware acceleration and fixes the bug */
-        }
-
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: #2c3e50; z-index: 1001; height: 60px; }
         .nav-container { position: relative; height: 100%; display: flex; align-items: center; overflow: visible !important; }
         .nav-logo { position: absolute; left: 2rem; top: 0; width: 120px; height: 120px; background: #2c3e50; border-radius: 50%; transition: transform 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 1002; }
         .nav-logo::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 50%; border-bottom-left-radius: 120px; border-bottom-right-radius: 120px; box-shadow: 0px 8px 10px -6px rgba(0,0,0,0.4); z-index: -1; }
@@ -41,10 +34,16 @@
         .section { padding: 4rem 0; text-align: center; }
         .section-light { background: #fff; }
         .section h2 { font-size: 2.5rem; margin-bottom: 2rem; color: #2c3e50; }
-        #contact .container { display: flex; flex-direction: column; align-items: center; }
-        .contact-form { width: 100%; max-width: 800px; margin-top: 2rem; }
+        
+        /* --- UPDATED: The Definitive Form Centering Fix --- */
+        .contact-form {
+            max-width: 800px;
+            margin: 2rem auto 0 auto; /* auto on left/right margin forces centering */
+            text-align: left; /* Keep placeholder text aligned to the left */
+        }
         .contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #ddd; font-size: 1rem; font-family: inherit; }
         .contact-form textarea { resize: vertical; min-height: 150px; }
+        
         #about p { font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
         .room-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
         .room-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; width: 320px; text-align: left; }
@@ -128,6 +127,7 @@
     <section id="rooms" class="section"><div class="container"><h2>Our Rooms</h2><div class="room-container"><div class="room-card"><div class="room-image-container"><img src="images/double_room/first.jpg" alt="Superior Double Room" data-room="double"></div><div class="room-card-content"><h3>Superior Double Room</h3><ul><li>Comfortable Double Bed</li><li>Private Balcony</li><li>Air Conditioning</li><li>Free WiFi</li></ul></div></div><div class="room-card"><div class="room-image-container"><img src="images/twin_room/first.jpg" alt="Superior Twin Room" data-room="twin"></div><div class="room-card-content"><h3>Superior Twin Room</h3><ul><li>Two Single Beds</li><li>Private Balcony</li><li>Air Conditioning</li><li>Free WiFi</li></ul></div></div></div></div></section>
     <section id="gallery" class="section section-light"><div class="container"><h2>Photo Gallery</h2><div class="gallery-grid"><img src="images/double_room/first.jpg" alt="Double Room View"><img src="images/twin_room/first.jpg" alt="Twin Room View"><img src="images/double_room/gallery-9.jpg" alt="Double Room"><img src="images/double_room/gallery-3.jpg" alt="Double Room"><img src="images/double_room/gallery-5.jpg" alt="Double Room"><img src="images/double_room/gallery-7.jpg" alt="Double Room"><img src="images/twin_room/gallery-2.jpg" alt="Twin Room"><img src="images/twin_room/gallery-13.jpg" alt="Twin Room"><img src="images/twin_room/gallery-12.jpg" alt="Twin Room"><img src="images/gallery-8.jpg" alt="Hotel exterior view"><img src="images/double_room/gallery-1.jpg" alt="hotel balcony 1st floor"><img src="images/double_room/gallery-10.jpg" alt="hotel balcony 2nd floor"><img src="images/double_room/gallery-11.jpg" alt="Kitchen area"></div></div></section>
     
+    <!-- UPDATED: Simplified Contact Section HTML -->
     <section id="contact" class="section">
         <div class="container">
             <h2>Get in Touch</h2>
@@ -186,7 +186,7 @@
     
     function updateBookingLinks() {
         const isMobile = window.innerWidth <= 992;
-        const bookNowButtons = document.querySelectorAll('.book-now-btn a');
+        const bookNowButtons = document.querySelectorAll('.book-now-btn');
         
         bookNowButtons.forEach(button => {
             if (isMobile) {
