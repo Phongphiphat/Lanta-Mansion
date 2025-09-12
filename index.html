@@ -267,10 +267,11 @@
         });
 
         const bookingContainer = document.getElementById('bookingContainer');
+        const bookingIframe = document.getElementById('bookingIframe'); // We need this element for the border
         const fallbackButton = document.getElementById('iframe-fallback-btn');
         const iframeOverlay = document.getElementById('iframe-overlay');
 
-        if (bookingContainer && fallbackButton && iframeOverlay) {
+        if (bookingContainer && bookingIframe && fallbackButton && iframeOverlay) {
 
             function updateBookingView() {
                 if (window.Cookiebot && (Cookiebot.consent.statistics || Cookiebot.consent.marketing)) {
@@ -281,14 +282,17 @@
                     fallbackButton.style.display = 'inline-block';
                 }
             }
-            window.addEventListener('cookiebot.changed', updateBookingView);
-            setTimeout(updateBookingView, 200);
+
+            window.addEventListener('cookiebot.changed', function () {
+                setTimeout(updateBookingView, 100);
+            });
+
+             setTimeout(updateBookingView, 200);
 
             iframeOverlay.addEventListener('mousedown', () => {
             iframeOverlay.style.display = 'none';
-                
-                bookingContainer.style.boxShadow = '0 0 0 3px #e67e22'; // Your theme's orange color
-                bookingContainer.style.borderRadius = '8px'; // Match the iframe's border-radius
+                bookingIframe.style.boxShadow = '0 0 0 5px #e67e22'; // Thicker 5px border
+                bookingIframe.style.borderRadius = '8px'; // Ensure radius matches the new border
 
             }, { once: true });
         }
