@@ -133,6 +133,13 @@
             #booking .desktop-booking-content { display: none; }
             .mobile-book-btn { display: inline-block; }
         }
+        /* --- IFRAME SCROLL-FIX --- */
+        #bookingIframe {
+            pointer-events: none;
+        }
+        #bookingContainer.iframe-active #bookingIframe {
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -253,26 +260,29 @@
             });
         });
 
+        const bookingContainer = document.getElementById('bookingContainer');
         const bookingIframe = document.getElementById('bookingIframe');
         const fallbackButton = document.getElementById('iframe-fallback-btn');
 
-        if (bookingIframe && fallbackButton) {
+        if (bookingContainer && bookingIframe && fallbackButton) {
+
 
             function updateBookingView() {
-       
                 if (window.Cookiebot && (Cookiebot.consent.statistics || Cookiebot.consent.marketing)) {
-                    bookingIframe.style.display = 'block';
+                    bookingContainer.style.display = 'block';
                     fallbackButton.style.display = 'none';
                 } else {
-                    bookingIframe.style.display = 'none';
+                    bookingContainer.style.display = 'none';
                     fallbackButton.style.display = 'inline-block';
                 }
             }
-
             window.addEventListener('cookiebot.changed', updateBookingView);
-
             setTimeout(updateBookingView, 200);
-            }
+
+            bookingContainer.addEventListener('mousedown', () => {
+                bookingContainer.classList.add('iframe-active');
+            }, { once: true });
+        }
         
     });
     
