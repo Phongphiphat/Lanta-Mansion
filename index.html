@@ -285,11 +285,15 @@
             setTimeout(updateBookingView, 200);
 
             iframeOverlay.addEventListener('mousedown', () => {
-                iframeOverlay.style.display = 'none';
-            }, { once: true }); 
+            iframeOverlay.style.display = 'none';
+                
+                bookingContainer.style.boxShadow = '0 0 0 3px #e67e22'; // Your theme's orange color
+                bookingContainer.style.borderRadius = '8px'; // Match the iframe's border-radius
+
+            }, { once: true });
         }
         
-    });
+      });
     
     window.addEventListener('resize', updateBookingLinks);
 </script>
