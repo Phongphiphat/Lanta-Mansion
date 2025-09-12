@@ -267,7 +267,7 @@
         });
 
         const bookingContainer = document.getElementById('bookingContainer');
-        const bookingIframe = document.getElementById('bookingIframe'); // We need this element for the border
+        const bookingIframe = document.getElementById('bookingIframe');
         const fallbackButton = document.getElementById('iframe-fallback-btn');
         const iframeOverlay = document.getElementById('iframe-overlay');
 
@@ -283,16 +283,21 @@
                 }
             }
 
-            window.addEventListener('cookiebot.changed', function () {
-                setTimeout(updateBookingView, 100);
-            });
+            window.CookiebotCallback_OnAccept = function() {
+                updateBookingView();
+            }
 
-             setTimeout(updateBookingView, 200);
+            window.CookiebotCallback_OnDecline = function() {
+                updateBookingView();
+            }
+
+            setTimeout(updateBookingView, 200);
 
             iframeOverlay.addEventListener('mousedown', () => {
             iframeOverlay.style.display = 'none';
-                bookingIframe.style.boxShadow = '0 0 0 5px #e67e22'; // Thicker 5px border
-                bookingIframe.style.borderRadius = '8px'; // Ensure radius matches the new border
+
+                bookingIframe.style.boxShadow = '0 0 0 5px #e67e22';
+                bookingIframe.style.borderRadius = '8px';
 
             }, { once: true });
         }
