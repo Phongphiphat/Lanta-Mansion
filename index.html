@@ -210,18 +210,45 @@
 
 <script>
     const roomImages = { double: ['images/double_room/first.webp','images/double_room/gallery-9.webp','images/double_room/gallery-1.webp','images/double_room/gallery-3.webp','images/double_room/gallery-5.webp','images/double_room/gallery-7.webp','images/double_room/gallery-9.webp','images/double_room/gallery-10.webp','images/double_room/gallery-11.webp','images/double_room/gallery-6.webp'], twin: ['images/twin_room/first.webp','images/twin_room/gallery-2.webp','images/twin_room/gallery-13.webp','images/twin_room/gallery-10.webp','images/twin_room/gallery-12.webp','images/twin_room/gallery-11.webp','images/twin_room/gallery-6.webp'] };
+    const galleryGridImages = document.querySelectorAll('.gallery-grid img');
+    const galleryImageUrls = Array.from(galleryGridImages).map(img => img.src);
+
     const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightbox-img');
     const roomCardImages = document.querySelectorAll('.room-image-container'); 
     let currentImageList = [], currentImageIndex = 0;
-    function openLightbox(e){currentImageList=roomImages[e],currentImageIndex=0,updateLightboxImage(),lightbox.style.display="flex",document.addEventListener("keydown",handleKeydown)}function updateLightboxImage(){lightboxImg.src=currentImageList[currentImageIndex]}function showNextImage(){currentImageIndex=(currentImageIndex+1)%currentImageList.length,updateLightboxImage()}function showPrevImage(){currentImageIndex=(currentImageIndex-1+currentImageList.length)%currentImageList.length,updateLightboxImage()}function closeLightbox(){lightbox.style.display="none",document.removeEventListener("keydown",handleKeydon)}
+
+    function openLightbox(imageList, startIndex){
+        currentImageList=imageList;
+        currentImageIndex=startIndex;
+        updateLightboxImage();
+        lightbox.style.display="flex";
+        document.addEventListener("keydown",handleKeydown);
+    }
+    function updateLightboxImage(){lightboxImg.src=currentImageList[currentImageIndex]}
+    function showNextImage(){currentImageIndex=(currentImageIndex+1)%currentImageList.length;updateLightboxImage()}
+    function showPrevImage(){currentImageIndex=(currentImageIndex-1+currentImageList.length)%currentImageList.length;updateLightboxImage()}
+    function closeLightbox(){lightbox.style.display="none";document.removeEventListener("keydown",handleKeydown)}
+
     roomCardImages.forEach(container => {
         container.addEventListener('click', () => {
             const img = container.querySelector('img');
             const roomType = img.getAttribute('data-room');
-            if (roomType) { openLightbox(roomType); }
+            if (roomType) { openLightbox(roomImages[roomType], 0); }
         });
     });
-    document.querySelector(".lightbox-close").addEventListener("click",closeLightbox),document.querySelector(".lightbox-next").addEventListener("click",showNextImage),document.querySelector(".lightbox-prev").addEventListener("click",showPrevImage),lightbox.addEventListener("click",e=>{e.target===lightbox&&closeLightbox()});function handleKeydown(e){"ArrowRight"===e.key?showNextImage():"ArrowLeft"===e.key?showPrevImage():"Escape"===e.key&&closeLightbox()}
+
+    galleryGridImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            openLightbox(galleryImageUrls, index);
+        });
+    });
+
+    document.querySelector(".lightbox-close").addEventListener("click",closeLightbox);
+    document.querySelector(".lightbox-next").addEventListener("click",showNextImage);
+    document.querySelector(".lightbox-prev").addEventListener("click",showPrevImage);
+    lightbox.addEventListener("click",e=>{if(e.target===lightbox){closeLightbox()}});
+    function handleKeydown(e){"ArrowRight"===e.key?showNextImage():"ArrowLeft"===e.key?showPrevImage():"Escape"===e.key&&closeLightbox()}
+
     const form = document.getElementById('contact-form');
     const statusPopup = document.getElementById('status-popup');
     const popupMessage = document.getElementById('popup-message');
