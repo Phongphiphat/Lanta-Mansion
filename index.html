@@ -133,12 +133,6 @@
             #booking .desktop-booking-content { display: none; }
             .mobile-book-btn { display: inline-block; }
         }
-        #bookingIframe {
-            pointer-events: none;
-        }
-        #bookingContainer.iframe-active #bookingIframe {
-            pointer-events: auto;
-        }
     </style>
 </head>
 <body>
@@ -190,7 +184,7 @@
         </div>
     </section>
     
-    <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><div id="bookingContainer" class="desktop-booking-content"><p>Check availability and book your stay with us directly.</p><iframe id="bookingIframe" class="desktop-booking-iframe" src="https://be.aiosell.com/book/3e3f09e846"></iframe></div><a href="https://be.aiosell.com/book/3e3f09e846" class="btn mobile-book-btn" target="_blank">Book Now</a></div></section>
+    <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><div class="desktop-booking-content"><p>Check availability and book your stay with us directly.</p><iframe class="desktop-booking-iframe" src="https://be.aiosell.com/book/3e3f09e846"></iframe></div><a href="https://be.aiosell.com/book/3e3f09e846" class="btn mobile-book-btn" target="_blank">Book Now</a></div></section>
     <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p>Our prime location offers the best of both worlds: serene tranquility and easy access to local attractions. We are just a 5-minute walk from the soft sands of Klong Toab beach, a perfect spot for swimming and watching the sunset. Within a short stroll, you'll also discover a variety of authentic local restaurants and charming cafes. We are a perfect base for exploring the island, with the famous Lanta Old Town just a scenic 15-minute scooter ride away.</p><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718">+66 65 318 1718</a></p></div></div></div></section>
     <footer class="footer">
         <p>&copy; 2025 Phongphiphat Lanta Mansion. All Rights Reserved.</p>
@@ -258,15 +252,6 @@
                 }
             });
         });
-
-        const bookingContainer = document.getElementById('bookingContainer');
-        
-        if (bookingContainer) {
-            bookingContainer.addEventListener('mousedown', () => {
-                bookingContainer.classList.add('iframe-active');
-            }, { once: true });
-        }
-        
     });
     
     window.addEventListener('resize', updateBookingLinks);
