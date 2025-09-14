@@ -310,14 +310,22 @@
         if (bookingContainer && bookingIframe && fallbackButton && iframeOverlay) {
 
             function updateBookingView() {
-                if (window.Cookiebot && (Cookiebot.consent.statistics || Cookiebot.consent.marketing)) {
+            const isDesktop = window.innerWidth > 992;
+
+            if (window.Cookiebot && (Cookiebot.consent.statistics || Cookiebot.consent.marketing)) {
+                if (isDesktop) {
                     bookingContainer.style.display = 'block';
-                    fallbackButton.style.display = 'none';
-                } else {
-                    bookingContainer.style.display = 'none';
+                }
+                fallbackButton.style.display = 'none';
+            } else {
+                bookingContainer.style.display = 'none';
+                if (isDesktop) {
                     fallbackButton.style.display = 'inline-block';
+                } else {
+                    fallbackButton.style.display = 'none';
                 }
             }
+        }
 
             window.CookiebotCallback_OnAccept = function() {
                 updateBookingView();
@@ -328,7 +336,7 @@
             }
 
             setTimeout(updateBookingView, 200);
-
+            window.addEventListener('resize', updateBookingView);
             iframeOverlay.addEventListener('mousedown', () => {
             iframeOverlay.style.display = 'none';
 
