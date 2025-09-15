@@ -275,19 +275,24 @@
     const navLinks = document.querySelectorAll('.nav-menu a');
     
     function updateBookingLinks() {
-        const isMobile = window.innerWidth <= 992;
-        const bookNowButtons = document.querySelectorAll('.book-now-btn');
-        
-        bookNowButtons.forEach(button => {
-            if (isMobile) {
-                button.href = 'https://be.aiosell.com/book/3e3f09e846';
-                button.setAttribute('target', '_blank');
-            } else {
-                button.href = '#booking';
-                button.removeAttribute('target');
-            }
-        });
-    }
+    const isMobile = window.innerWidth <= 992;
+    // This is the new check: do we have consent for the iframe to be visible?
+    const hasConsent = window.Cookiebot && (Cookiebot.consent.statistics || Cookiebot.consent.marketing);
+    const bookNowButtons = document.querySelectorAll('.book-now-btn');
+    
+    bookNowButtons.forEach(button => {
+        // The new condition: if it's mobile OR if consent is denied...
+        if (isMobile || !hasConsent) {
+            // ...then the button should be a direct link.
+            button.href = 'https://be.aiosell.com/book/3e3f09e846';
+            button.setAttribute('target', '_blank');
+        } else {
+            // Otherwise (on desktop with consent), it should scroll to the iframe.
+            button.href = '#booking';
+            button.removeAttribute('target');
+        }
+    });
+}
 
     document.addEventListener('DOMContentLoaded', function() {
         updateBookingLinks();
@@ -329,10 +334,12 @@
 
             window.CookiebotCallback_OnAccept = function() {
                 updateBookingView();
+                updateBookingLinks(); 
             }
 
             window.CookiebotCallback_OnDecline = function() {
                 updateBookingView();
+                updateBookingLinks(); 
             }
 
             setTimeout(updateBookingView, 200);
