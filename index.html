@@ -171,8 +171,8 @@
                 <li><a href="#gallery">Photos</a></li>
                 <li><a href="#contact">Contact Us</a></li>
                 <li><a href="#location">Location</a></li>
-                <li class="nav-btn"><a href="#booking" class="book-now-btn">Book Now</a></li>
-                <li class="nav-phone"><a href="tel:+66653181718">+66 65 318 1718</a></li>
+                <li class="nav-btn"><a href="#booking" class="book-now-btn tracking-book-now">Book Now</a></li>
+                <li class="nav-phone"><a href="tel:+66653181718" class="tracking-phone-click">+66 65 318 1718</a></li>
             </ul>
             <button id="menu-toggle" aria-label="Toggle menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
         </div>
@@ -182,7 +182,7 @@
         <div class="container">
             <h1>Phongphiphat Lanta Mansion: Your Hotel in Koh Lanta</h1>
             <p>Your peaceful retreat, just moments from the sea.</p>
-            <a href="#booking" class="btn book-now-btn">Book Now</a>
+            <a href="#booking" class="btn book-now-btn tracking-book-now">Book Now</a>
         </div>
     </header>
 
@@ -206,8 +206,8 @@
         </div>
     </section>
     
-    <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><div id="bookingContainer" class="desktop-booking-content"><p>Check availability and book your stay with us directly.</p><div id="iframe-overlay"></div><iframe id="bookingIframe" class="desktop-booking-iframe" src="https://be.aiosell.com/book/3e3f09e846" title="Room booking engine"></iframe></div><a href="https://be.aiosell.com/book/3e3f09e846" id="iframe-fallback-btn" class="btn" target="_blank" style="display: none; margin-top: 2rem;">Book Now</a><a href="https://be.aiosell.com/book/3e3f09e846" class="btn mobile-book-btn" target="_blank">Book Now</a></div></section>
-    <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy" title="Map of Phongphiphat Lanta Mansion"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p>Our prime location offers the best of both worlds: serene tranquility and easy access to local attractions. We are just a 5-minute walk from the soft sands of Klong Toab beach, a perfect spot for swimming and watching the sunset. Within a short stroll, you'll also discover a variety of authentic local restaurants and charming cafes. We are a perfect base for exploring the island, with the famous Lanta Old Town just a scenic 15-minute scooter ride away.</p><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718">+66 65 318 1718</a></p></div></div></div></section>
+    <section id="booking" class="section section-light"><div class="container"><h2>Reserve Your Room</h2><div id="bookingContainer" class="desktop-booking-content"><p>Check availability and book your stay with us directly.</p><div id="iframe-overlay"></div><iframe id="bookingIframe" class="desktop-booking-iframe" src="https://be.aiosell.com/book/3e3f09e846" title="Room booking engine"></iframe></div><a href="https://be.aiosell.com/book/3e3f09e846" id="iframe-fallback-btn" class="btn" target="_blank" style="display: none; margin-top: 2rem;">Book Now</a><a href="https://be.aiosell.com/book/3e3f09e846" class="btn mobile-book-btn tracking-book-now">Book Now</a></div></section>
+    <section id="location" class="section"><div class="container"><h2>Our Location</h2><div class="location-grid"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.202948006503!2d99.04294767577323!3d7.5528362103449975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304e051aa51f6329%3A0x395e7b343c4966d4!2sPhongpipat%20Lanta%20Mansion!5e0!3m2!1sen!2sus!4v1756958350158!5m2!1sen!2sus" loading="lazy" title="Map of Phongphiphat Lanta Mansion"></iframe></div><div class="address-info"><h3>Find Us Here</h3><p>Our prime location offers the best of both worlds: serene tranquility and easy access to local attractions. We are just a 5-minute walk from the soft sands of Klong Toab beach, a perfect spot for swimming and watching the sunset. Within a short stroll, you'll also discover a variety of authentic local restaurants and charming cafes. We are a perfect base for exploring the island, with the famous Lanta Old Town just a scenic 15-minute scooter ride away.</p><p><strong>Address:</strong><br>156 Moo 8, Ko Lanta Yai<br>Ko Lanta District, Krabi 81150<br>Thailand</p><p><strong>Phone:</strong><br><a href="tel:+66653181718" class="tracking-phone-click">+66 65 318 1718</a></p></div></div></div></section>
     <footer class="footer">
         <p>&copy; 2025 Phongphiphat Lanta Mansion. All Rights Reserved.</p>
     </footer>
@@ -226,13 +226,15 @@
     const roomCardImages = document.querySelectorAll('.room-image-container'); 
     let currentImageList = [], currentImageIndex = 0;
 
-    function openLightbox(imageList, startIndex){
+    function openLightbox(imageList, startIndex, galleryName){
+        dataLayer.push({'event': 'view_photo_gallery', 'gallery_name': galleryName});
         currentImageList=imageList;
         currentImageIndex=startIndex;
         updateLightboxImage();
         lightbox.style.display="flex";
         document.addEventListener("keydown",handleKeydown);
     }
+    
     function updateLightboxImage(){lightboxImg.src=currentImageList[currentImageIndex]}
     function showNextImage(){currentImageIndex=(currentImageIndex+1)%currentImageList.length;updateLightboxImage()}
     function showPrevImage(){currentImageIndex=(currentImageIndex-1+currentImageList.length)%currentImageList.length;updateLightboxImage()}
@@ -242,13 +244,13 @@
         container.addEventListener('click', () => {
             const img = container.querySelector('img');
             const roomType = img.getAttribute('data-room');
-            if (roomType) { openLightbox(roomImages[roomType], 0); }
+            if (roomType) { openLightbox(roomImages[roomType], 0, roomType + '_room'); }
         });
     });
 
     galleryGridImages.forEach((img, index) => {
         img.addEventListener('click', () => {
-            openLightbox(galleryImageUrls, index);
+            openLightbox(galleryImageUrls, index, 'main_gallery');
         });
     });
 
@@ -265,7 +267,7 @@
     async function handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
-        fetch(event.target.action, { method: form.method, body: data, headers: {'Accept': 'application/json'} }).then(response => { if (response.ok) { popupMessage.textContent = "Thank you! Your message has been sent successfully."; statusPopup.classList.remove('error'); statusPopup.style.display = 'block'; form.reset(); } else { response.json().then(data => { if (Object.hasOwn(data, 'errors')) { popupMessage.textContent = data["errors"].map(error => error["message"]).join(", "); } else { popupMessage.textContent = 'Oops! There was a problem submitting your form.'; } statusPopup.classList.add('error'); statusPopup.style.display = 'block'; }) } }).catch(error => { popupMessage.textContent = 'Oops! There was a problem submitting your form.'; statusPopup.classList.add('error'); statusPopup.style.display = 'block'; });
+        fetch(event.target.action, { method: form.method, body: data, headers: {'Accept': 'application/json'} }).then(response => { if (response.ok) {dataLayer.push({'event': 'submit_contact_form'}); popupMessage.textContent = "Thank you! Your message has been sent successfully."; statusPopup.classList.remove('error'); statusPopup.style.display = 'block'; form.reset(); } else { response.json().then(data => { if (Object.hasOwn(data, 'errors')) { popupMessage.textContent = data["errors"].map(error => error["message"]).join(", "); } else { popupMessage.textContent = 'Oops! There was a problem submitting your form.'; } statusPopup.classList.add('error'); statusPopup.style.display = 'block'; }) } }).catch(error => { popupMessage.textContent = 'Oops! There was a problem submitting your form.'; statusPopup.classList.add('error'); statusPopup.style.display = 'block'; });
     }
     form.addEventListener("submit", handleSubmit);
     popupClose.addEventListener('click', () => { statusPopup.style.display = 'none'; });
@@ -345,13 +347,25 @@
             setTimeout(updateBookingView, 200);
             window.addEventListener('resize', updateBookingView);
             iframeOverlay.addEventListener('mousedown', () => {
-            iframeOverlay.style.display = 'none';
+                dataLayer.push({'event': 'interact_booking_iframe'});
+                iframeOverlay.style.display = 'none';
 
                 bookingIframe.style.boxShadow = '0 0 0 5px #e67e22';
                 bookingIframe.style.borderRadius = '8px';
 
             }, { once: true });
         }
+
+        document.querySelectorAll('.tracking-book-now').forEach(button => {
+            button.addEventListener('click', () => {
+                dataLayer.push({'event': 'click_book_now'});
+            });
+        });
+        document.querySelectorAll('.tracking-phone-click').forEach(link => {
+            link.addEventListener('click', () => {
+                dataLayer.push({'event': 'click_phone_number'});
+            });
+        });
         
       });
     
